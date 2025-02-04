@@ -22,11 +22,7 @@ def print_menu():
     print("11. display ALL")
     print("12. help")
 
-def check_input_eng():
-    cert_type = input("Choose certificate (1: IELTS, 2: TOEFL): ")
-    
-    while cert_type not in ["1", "2"]:
-        cert_type = input("Invalid choice! Choose 1 for IELTS or 2 for TOEFL: ")
+def check_input_eng(cert_type):
 
     if cert_type == "1":
         cert = "IELTS"
@@ -70,24 +66,22 @@ def main():
             language = input("Enter Language (English/Japanese/Korean): ")
 
             if language.lower() == "english":
+                cert_type = input("Choose certificate (1: IELTS, 2: TOEFL): ")
+                while cert_type not in ["1", "2"]:
+                    cert_type = input("Invalid choice! Choose 1 for IELTS or 2 for TOEFL: ")
+                
                 print("Enter Initial Score: ")
-                initial_score = check_input_eng()
+                initial_score = check_input_eng(cert_type)
                 if(initial_score == False): continue
 
                 print("Enter Exam Score: ")
-                exam_score = check_input_eng()
+                exam_score = check_input_eng(cert_type)
                 if(exam_score == False): continue
+
                 print("Enter target Score: ")
-                target_score = check_input_eng()
-                while(("IELTS" in exam_score and "IELTS" not in target_score) or ("TOEFL" in exam_score and "TOEFL" not in target_score)):
-                    check = input("target Score and exam Score must be same, please try again or cancel(y/n): ")
-                    while check not in ["y", "n"]:
-                        check = input("Invalid choice! Press y (yes) or n (no): ").lower()
-                    if check == "n":
-                        target_score = False
-                        break
-                    target_score = check_input_eng()
+                target_score = check_input_eng(cert_type)
                 if(target_score == False): continue
+                
                 student = EnglishStudent(id_card, name, address, phone, language, initial_score, exam_score, target_score)
 
             elif language.lower() == "japanese":
