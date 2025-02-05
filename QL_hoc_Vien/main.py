@@ -124,25 +124,28 @@ def main():
 
 # chức năng sửa thông tin theo id
         elif choice == "2":
-            id_card = input("Enter ID Card of the student to update: ")
-            check = manager.check_id_card(id_card)
-            if(check == False): 
-                print("student not found") 
-                continue
+            while True:
+                id_card = input("Enter ID Card of the student to update: ")
+                check = manager.check_id_card(id_card)
+                if check:
+                    break
+                print("Student not found. Please try again.")
+            
             update_fields = {}
             while True:
+                print("You can update the following fields: id_card, name, address, phone, language, initial_level, test_score, target_level")
                 field = input("Enter the field to update (or type 'done' to finish): ").lower()
                 if field == "done":
                     break
-                # if not hasattr(EnglishStudent, field) and not hasattr(JapaneseStudent, field) and not hasattr(KoreanStudent, field) and not hasattr(Student, field):
-                #     print(f"Warning: Field '{field}' does not exist and will be ignored.")
-                #     continue
+                if field not in ["id_card", "name", "address", "phone", "language", "initial_level", "test_score", "target_level"]:
+                    print(f"Warning: Field '{field}' does not exist and will be ignored.")
+                    continue
                 value = input(f"Enter the new value for {field}: ")
                 update_fields[field] = value
             if manager.update_student(id_card, **update_fields):
                 print("Student updated successfully.")
             else:
-                print("no object updated")
+                print("No object updated")
 
 # chức năng xóa sinh viên theo id
         elif choice == "3":
