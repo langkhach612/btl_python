@@ -63,7 +63,13 @@ def main():
             name = input("Enter Name: ")
             address = input("Enter Address: ")
             phone = input("Enter Phone: ")
-            language = input("Enter Language (English/Japanese/Korean): ")
+            
+            while True:
+                language = input("Enter Language (English/Japanese/Korean): ")
+                if language.lower() in ["english", "japanese", "korean"]:
+                    break
+                else:
+                    print("Invalid language! Please enter English, Japanese, or Korean.")
 
             if language.lower() == "english":
                 cert_type = input("Choose certificate (1: IELTS, 2: TOEFL): ")
