@@ -71,13 +71,6 @@ class ManageStudent:
 
 # them hoc vien
     def add_student(self, student):
-        for stu in self.students:
-            if stu.id_card == student.id_card :
-                print("id_card have existed")
-                return
-            if stu.phone == student.phone:
-                print("phone have existed")
-                return
         self.students.append(student)
         self.save_to_file()
         print("student was added successfully")
@@ -272,6 +265,14 @@ class ManageStudent:
         check = False
         for stu in self.students:
             if(stu.id_card == id_card):
+                check = True
+                break
+        return check
+    
+    def check_phone(self,phone):
+        check = False
+        for stu in self.students:
+            if(stu.phone == phone):
                 check = True
                 break
         return check

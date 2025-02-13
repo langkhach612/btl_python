@@ -46,7 +46,11 @@ def check_input_eng(cert_type):
             ques = input("Invalid choice! Press y (yes) or n (no): ").lower()
         if ques == "n":
             return False  
-            
+
+def check_in_empty(str_input):
+    while(str_input.strip() == ""):
+        str_input = input(f"Enter again,not allow value none: ")
+    return str_input
     
 def main():
     manager = ManageStudent()
@@ -60,10 +64,19 @@ def main():
 # chức năng thêm sinh vien
         if choice == "1":
             id_card = input("Enter ID Card: ")
-            name = input("Enter Name: ")
-            address = input("Enter Address: ")
+            while(manager.check_id_card(id_card) or id_card.strip() == ""):
+                id_card = check_in_empty(id_card)
+                if(manager.check_id_card(id_card)):
+                    id_card = input("Enter ID Card again, this id has existed: ")
+
+            name = input("Enter Name: "); name = check_in_empty(name)
+            address = input("Enter Address: "); address = check_in_empty(address)
             phone = input("Enter Phone: ")
-            
+            while(manager.check_phone(phone) == True or phone.strip() == ""):
+                phone = check_in_empty(phone)
+                if(manager.check_phone(phone)):
+                    phone = input("Enter Phone again, phone number has existed: ")
+
             while True:
                 language = input("Enter Language (English/Japanese/Korean): ")
                 if language.lower() in ["english", "japanese", "korean"]:
@@ -134,7 +147,7 @@ def main():
             update_fields = {}
             while True:
                 print("You can update the following fields: id_card, name, address, phone, language, initial_level, test_score, target_level")
-                field = input("Enter the field to update (or type 'done' to finish): ").lower()
+                field = input("Enter the field to update (or enter 'done' to finish): ").lower()
                 if field == "done":
                     break
                 if field not in ["id_card", "name", "address", "phone", "language", "initial_level", "test_score", "target_level"]:
