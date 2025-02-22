@@ -15,7 +15,7 @@ class ManageStudent:
         self.filename = filename
         self.load_from_file()
 
-# xu ly voi file json de nhap,xuat data
+# xu ly voi file json de nhap,xuat data(chatgpt)
     def save_to_file(self):
         with open(self.filename, "w", encoding="utf-8") as f:
             json_data = [

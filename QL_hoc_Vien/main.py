@@ -146,11 +146,11 @@ def main():
             
             update_fields = {}
             while True:
-                print("You can update the following fields: id_card, name, address, phone, language, initial_level, test_score, target_level")
+                print("You can update the following fields: name, address, phone, language, initial_level, test_score, target_level")
                 field = input("Enter the field to update (or enter 'done' to finish): ").lower()
                 if field == "done":
                     break
-                if field not in ["id_card", "name", "address", "phone", "language", "initial_level", "test_score", "target_level"]:
+                if field not in ["name", "address", "phone", "language", "initial_level", "test_score", "target_level"]:
                     print(f"Warning: Field '{field}' does not exist and will be ignored.")
                     continue
                 value = input(f"Enter the new value for {field}: ")
